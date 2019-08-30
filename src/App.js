@@ -1,13 +1,13 @@
 import React from 'react';
 
-import MoviesList from './components/movies/MoviesList'
+import MoviesList from './components/movies/MoviesList';
 
 const App = () => {
   return (
     <div>
-      <MoviesList/>
+      <MoviesList />
     </div>
-  )
-}
+  );
+};
 
 export default App;

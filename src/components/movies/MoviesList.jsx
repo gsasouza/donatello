@@ -41,9 +41,9 @@ const columns = [
     header: {
       label: 'Genres'
     },
-    renderRow: (genre) => genre.join(', ')
+    renderRow: genre => genre.join(', ')
   }
-]
+];
 
 const MoviesList = () => {
   const {
@@ -57,12 +57,15 @@ const MoviesList = () => {
     data: movies,
     rowsPerPage: rowsPerPage,
     clearPagination,
-    page,
+    page
   });
 
   return (
     <>
-      <input value={filters.title} onChange={(e) => handleTitleFilter(e.target.value)} />
+      <input
+        value={filters.title}
+        onChange={e => handleTitleFilter(e.target.value)}
+      />
       <Table
         columns={columns}
         data={filteredData}
@@ -72,7 +75,7 @@ const MoviesList = () => {
         {...paginationProps}
       />
     </>
-  )
-}
+  );
+};
 
 export default MoviesList;

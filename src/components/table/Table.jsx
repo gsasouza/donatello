@@ -7,7 +7,7 @@ import Pagination from './Pagination';
 
 const StyledTable = styled.table`
   width: 100%;
-`
+`;
 
 const Table = ({
   columns,
@@ -16,12 +16,12 @@ const Table = ({
   page,
   totalCount,
   handleRowsPerPageChange,
-  handlePageChange,
+  handlePageChange
 }) => {
   return (
     <>
       <StyledTable>
-        <TableHead columns={columns}/>
+        <TableHead columns={columns} />
         <TableBody data={data} columns={columns} />
       </StyledTable>
       <Pagination
@@ -32,8 +32,7 @@ const Table = ({
         totalCount={totalCount}
       />
     </>
-  )
-}
-
+  );
+};
 
 export default Table;

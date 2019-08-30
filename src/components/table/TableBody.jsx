@@ -17,16 +17,17 @@ const TableBodyRow = ({ row, columns }) => {
         </td>
       ))}
     </tr>
-  )
-}
-
+  );
+};
 
 const TableBody = ({ data, columns }) => {
   return (
     <TBody>
-      {data.map(row => <TableBodyRow key={JSON.stringify(row)} row={row} columns={columns}/>)}
+      {data.map(row => (
+        <TableBodyRow key={JSON.stringify(row)} row={row} columns={columns} />
+      ))}
     </TBody>
-  )
-}
+  );
+};
 
 export default TableBody;

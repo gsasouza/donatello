@@ -5,33 +5,33 @@ const PaginationContainer = styled.div`
   border: 1px solid black;
 `;
 
-
 const RowsPerPageSelect = ({ onChangeRowsPerPage, rowsPerPage }) => {
   const rowsPerPageOptions = [10, 25, 50, 100];
   return (
     <>
       <label htmlFor={'rowsPerPage'}> Rows per page: </label>
-      <select defaultValue={rowsPerPage} fname={'rowsPerPage'} onChange={e => onChangeRowsPerPage(e.target.value)}>
+      <select
+        defaultValue={rowsPerPage}
+        fname={'rowsPerPage'}
+        onChange={e => onChangeRowsPerPage(e.target.value)}
+      >
         {rowsPerPageOptions.map(opt => (
-          <option
-            key={opt}
-            value={opt}
-          >
+          <option key={opt} value={opt}>
             {opt}
           </option>
         ))}
       </select>
     </>
-  )
-}
+  );
+};
 
 const PageInfo = ({ page, totalCount, rowsPerPage }) => {
   return (
     <span>
-      {(page * rowsPerPage) + 1 } - {(page + 1) * rowsPerPage} of {totalCount}
+      {page * rowsPerPage + 1} - {(page + 1) * rowsPerPage} of {totalCount}
     </span>
-  )
-}
+  );
+};
 
 const Pagination = ({
   totalCount = 100,
@@ -42,25 +42,33 @@ const Pagination = ({
 }) => {
   return (
     <PaginationContainer>
-      <RowsPerPageSelect rowsPerPage={rowsPerPage} onChangeRowsPerPage={handleRowsPerPageChange}/>
-      <PageInfo rowsPerPage={rowsPerPage} page={page} totalCount={totalCount}/>
+      <RowsPerPageSelect
+        rowsPerPage={rowsPerPage}
+        onChangeRowsPerPage={handleRowsPerPageChange}
+      />
+      <PageInfo rowsPerPage={rowsPerPage} page={page} totalCount={totalCount} />
       <nav>
         <ul>
           <li>
-            <button disabled={page === 0} onClick={() => handlePageChange(page - 1)}>
+            <button
+              disabled={page === 0}
+              onClick={() => handlePageChange(page - 1)}
+            >
               Previous
             </button>
           </li>
           <li>
-            <button disabled={page + 1 === Math.round(totalCount/rowsPerPage)} onClick={() => handlePageChange(page + 1)}>
+            <button
+              disabled={page + 1 === Math.round(totalCount / rowsPerPage)}
+              onClick={() => handlePageChange(page + 1)}
+            >
               Next
             </button>
           </li>
         </ul>
-
       </nav>
     </PaginationContainer>
-  )
-}
+  );
+};
 
-export default Pagination
+export default Pagination;
