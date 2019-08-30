@@ -1,9 +1,10 @@
 import React from 'react';
 
-const usePagination = ({ rowsPerPage = 10, page = 0 }) => {
+const usePagination = ({ data, rowsPerPage = 10, page = 0 }) => {
   const initialState = {
     rowsPerPage,
-    page
+    page,
+    paginatedData: []
   };
   const reducer = (state, action) => {
     switch (action.type) {
@@ -12,18 +13,37 @@ const usePagination = ({ rowsPerPage = 10, page = 0 }) => {
       case 'page':
         return { ...state, page: action.value };
       case 'clear':
-        return initialState;
+        return {
+          ...state,
+          rowsPerPage: initialState.rowsPerPage,
+          page: initialState.page
+        };
+      case 'paginatedData':
+        return { ...state, paginatedData: action.value };
       default:
         return state;
     }
   };
   const [state, dispatch] = React.useReducer(reducer, initialState);
 
+  React.useEffect(() => {
+    dispatch({
+      type: 'paginatedData',
+      value: data.slice(
+        state.page * state.rowsPerPage,
+        (state.page + 1) * state.rowsPerPage
+      )
+    });
+  }, [data, rowsPerPage, page, state.page, state.rowsPerPage]);
+
+  React.useEffect(() => {
+    dispatch({ type: 'clear' });
+  }, [data, rowsPerPage, page]);
+
   return {
     ...state,
     handlePageChange: value => dispatch({ type: 'page', value }),
-    handleRowsPerPageChange: value => dispatch({ type: 'rowsPerPage', value }),
-    clearPagination: () => dispatch({ type: 'clear' })
+    handleRowsPerPageChange: value => dispatch({ type: 'rowsPerPage', value })
   };
 };
 

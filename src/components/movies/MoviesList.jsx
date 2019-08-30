@@ -46,19 +46,19 @@ const columns = [
 ];
 
 const MoviesList = () => {
+  const { filteredData, handleTitleFilter, ...filters } = useFilter({
+    data: movies
+  });
   const {
     page,
     rowsPerPage,
-    clearPagination,
+    paginatedData,
     ...paginationProps
-  } = usePagination({});
-
-  const { filteredData, handleTitleFilter, ...filters } = useFilter({
-    data: movies,
-    rowsPerPage: rowsPerPage,
-    clearPagination,
-    page
+  } = usePagination({
+    data: filteredData
   });
+
+  console.log(paginatedData);
 
   return (
     <>
@@ -68,8 +68,8 @@ const MoviesList = () => {
       />
       <Table
         columns={columns}
-        data={filteredData}
-        totalCount={movies.length}
+        data={paginatedData}
+        totalCount={filteredData.length}
         page={page}
         rowsPerPage={rowsPerPage}
         {...paginationProps}

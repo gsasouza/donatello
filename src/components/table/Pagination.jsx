@@ -26,9 +26,11 @@ const RowsPerPageSelect = ({ onChangeRowsPerPage, rowsPerPage }) => {
 };
 
 const PageInfo = ({ page, totalCount, rowsPerPage }) => {
+  const first = page * rowsPerPage + 1;
+  const last = (page + 1) * rowsPerPage;
   return (
     <span>
-      {page * rowsPerPage + 1} - {(page + 1) * rowsPerPage} of {totalCount}
+      {first} - {last > totalCount ? totalCount : last} of {totalCount}
     </span>
   );
 };
@@ -59,7 +61,7 @@ const Pagination = ({
           </li>
           <li>
             <button
-              disabled={page + 1 === Math.round(totalCount / rowsPerPage)}
+              disabled={page + 1 === Math.ceil(totalCount / rowsPerPage)}
               onClick={() => handlePageChange(page + 1)}
             >
               Next
