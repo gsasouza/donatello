@@ -1,9 +1,11 @@
 import React from 'react';
 
+import MoviesList from './components/movies/MoviesList'
+
 const App = () => {
   return (
     <div>
-      APP
+      <MoviesList/>
     </div>
   )
 }
