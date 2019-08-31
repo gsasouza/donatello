@@ -48,13 +48,9 @@ const EmptyLabel = styled(LoadingLabel)`
   font-size: 30px;
 `;
 
-const CommentContainer = ({
-  commentsRef,
-  comments,
-  addComment,
-  title,
-  children
-}) => {
+const CommentList = ({ title }) => {
+  const { comments, addComment, isLoading } = useComments({ title });
+  const commentsRef = useScrollToBottom({ items: comments });
   return (
     <Content>
       <Row>
@@ -64,52 +60,23 @@ const CommentContainer = ({
         <ScreenLabel>{`${title} Comments`}</ScreenLabel>
       </Row>
       <Box>
-        <CommentsContainer ref={commentsRef}>{children}</CommentsContainer>
+        <CommentsContainer ref={commentsRef}>
+          {isLoading && (
+            <LoadingLabel>
+              Loading
+              <AnimatedDots />
+            </LoadingLabel>
+          )}
+          {!comments.length && (
+            <EmptyLabel> There's no comments yet </EmptyLabel>
+          )}
+          {comments.map((comment, index) => (
+            <Comment key={index} comment={comment} />
+          ))}
+        </CommentsContainer>
         <NewComment addComment={addComment} />
       </Box>
     </Content>
-  );
-};
-
-const CommentList = ({ title }) => {
-  const { comments, addComment, isLoading } = useComments({ title });
-  const commentsRef = useScrollToBottom({ items: comments });
-  if (isLoading)
-    return (
-      <CommentContainer
-        comments={comments}
-        commentsRef={commentsRef}
-        addComment={addComment}
-        title={title}
-      >
-        <LoadingLabel>
-          Loading
-          <AnimatedDots />
-        </LoadingLabel>
-      </CommentContainer>
-    );
-  if (!comments.length)
-    return (
-      <CommentContainer
-        comments={comments}
-        commentsRef={commentsRef}
-        addComment={addComment}
-        title={title}
-      >
-        <EmptyLabel> There's no comments yet </EmptyLabel>
-      </CommentContainer>
-    );
-  return (
-    <CommentContainer
-      comments={comments}
-      commentsRef={commentsRef}
-      addComment={addComment}
-      title={title}
-    >
-      {comments.map((comment, index) => (
-        <Comment key={index} comment={comment} />
-      ))}
-    </CommentContainer>
   );
 };
 
