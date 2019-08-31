@@ -7,11 +7,15 @@ const TBody = styled.tbody`
     border-bottom: 1px solid #816da04f;
     border-spacing: 5px 5px;
   }
+  tr:hover {
+    background-color: #816da04f;
+    cursor: ${props => (props.onRowClick ? 'pointer' : 'auto')};
+  }
 `;
 
-const TableBodyRow = ({ row, columns }) => {
+const TableBodyRow = ({ row, columns, onRowClick }) => {
   return (
-    <tr>
+    <tr onClick={() => onRowClick(row)}>
       {columns.map(({ property, renderRow }, index) => (
         <td key={row[property]}>
           {renderRow ? renderRow(row[property]) : row[property]}
@@ -21,11 +25,16 @@ const TableBodyRow = ({ row, columns }) => {
   );
 };
 
-const TableBody = ({ data, columns }) => {
+const TableBody = ({ data, columns, onRowClick }) => {
   return (
-    <TBody>
+    <TBody onRowClick={onRowClick}>
       {data.map(row => (
-        <TableBodyRow key={JSON.stringify(row)} row={row} columns={columns} />
+        <TableBodyRow
+          key={JSON.stringify(row)}
+          row={row}
+          columns={columns}
+          onRowClick={onRowClick}
+        />
       ))}
     </TBody>
   );

@@ -1,7 +1,9 @@
 import React from 'react';
 import { createGlobalStyle } from 'styled-components';
+import { Router } from '@reach/router';
 
 import MoviesList from './components/movies/MoviesList';
+import CommentList from './components/comments/CommentList';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -19,7 +21,10 @@ const App = () => {
   return (
     <>
       <GlobalStyle />
-      <MoviesList />
+      <Router>
+        <MoviesList default path={'/'} />
+        <CommentList path={'/comments/:title'} />
+      </Router>
     </>
   );
 };

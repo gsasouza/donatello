@@ -3,13 +3,7 @@ import styled from 'styled-components';
 
 import TitleFilter from './TitleFilter';
 import GenreFilter from './GenreFilter';
-
-export const Box = styled.div`
-  box-shadow: -1px 4px 46px -15px rgba(0, 0, 0, 0.3);
-  border-radius: 30px;
-  padding: 15px;
-  background-color: #ffffff;
-`;
+import Box from '../common/Box';
 
 const FilterInputWrapper = styled.div`
   display: flex;

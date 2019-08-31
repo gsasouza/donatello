@@ -1,21 +1,14 @@
 import React from 'react';
-import styled from 'styled-components';
+import { navigate } from '@reach/router';
 
+import Filters from './Filters';
+import Box from '../common/Box';
+import Content from '../common/Content';
+import ScreenLabel from '../common/ScreenLabel';
 import Table from '../table/Table';
 import usePagination from '../table/hooks/usePagination';
 import useFilter from './hooks/useFilter';
 import movies from './data/movies';
-import Filters, { Box } from './Filters';
-
-const Wrapper = styled.div`
-  max-width: 1000px;
-  width: 100%;
-  margin: 30px auto auto auto;
-`;
-
-const ScreenLabel = styled.h1`
-  color: #ffffff;
-`;
 
 const columns = [
   {
@@ -76,7 +69,7 @@ const MoviesList = () => {
   });
 
   return (
-    <Wrapper>
+    <Content>
       <ScreenLabel>Movies List</ScreenLabel>
       <Filters
         filters={filters}
@@ -90,10 +83,11 @@ const MoviesList = () => {
           totalCount={filteredData.length}
           page={page}
           rowsPerPage={rowsPerPage}
+          onRowClick={({ title }) => navigate(`/comments/${title}`)}
           {...paginationProps}
         />
       </Box>
-    </Wrapper>
+    </Content>
   );
 };
 

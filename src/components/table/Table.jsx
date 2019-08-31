@@ -19,13 +19,14 @@ const Table = ({
   page,
   totalCount,
   handleRowsPerPageChange,
-  handlePageChange
+  handlePageChange,
+  onRowClick
 }) => {
   return (
     <>
       <StyledTable>
         <TableHead columns={columns} />
-        <TableBody data={data} columns={columns} />
+        <TableBody data={data} columns={columns} onRowClick={onRowClick} />
       </StyledTable>
       <Pagination
         rowsPerPage={rowsPerPage}
