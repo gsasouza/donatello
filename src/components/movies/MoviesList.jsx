@@ -1,5 +1,6 @@
 import React from 'react';
 import { navigate } from '@reach/router';
+import styled from 'styled-components';
 
 import Filters from './Filters';
 import Box from '../common/Box';
@@ -9,6 +10,10 @@ import Table from '../table/Table';
 import usePagination from '../table/hooks/usePagination';
 import useFilter from './hooks/useFilter';
 import movies from './data/movies';
+
+const TableWrapper = styled(Box)`
+  margin-bottom: 40px;
+`;
 
 const columns = [
   {
@@ -76,7 +81,7 @@ const MoviesList = () => {
         handleGenreFilter={handleGenreFilter}
         handleTitleFilter={handleTitleFilter}
       />
-      <Box>
+      <TableWrapper>
         <Table
           columns={columns}
           data={paginatedData}
@@ -86,7 +91,7 @@ const MoviesList = () => {
           onRowClick={({ title }) => navigate(`/comments/${title}`)}
           {...paginationProps}
         />
-      </Box>
+      </TableWrapper>
     </Content>
   );
 };
