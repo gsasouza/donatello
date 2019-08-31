@@ -1,5 +1,13 @@
 import React from 'react';
-import styled from 'styled-components';
+import styled, { css } from 'styled-components';
+import useFocus from './hooks/useFocus';
+
+const Input = styled.input`
+  border: none;
+  width: 100%;
+  margin-left: 3px;
+  outline: none;
+`;
 
 const Fieldset = styled.fieldset`
   font-size: 14px;
@@ -11,22 +19,28 @@ const Fieldset = styled.fieldset`
   border: 1px solid #816da04f;
   margin: 0;
   padding: 5px 10px 8px;
-`;
-
-const Input = styled.input`
-  border: none;
-  width: 100%;
-  margin-left: 3px;
+  ${props =>
+    props.isFocused
+      ? css`
+          border-color: #3e3e74;
+          color: #3e3e74;
+          transition: all ease 0.3s;
+          outline: #3e3e74;
+        `
+      : ''}
 `;
 
 const TitleFilter = ({ value, handleChange }) => {
+  const { isFocused, handleFocus, handleBlur, ref } = useFocus();
   return (
-    <Fieldset>
+    <Fieldset isFocused={isFocused} onClick={handleFocus}>
       <legend> Title </legend>
       <Input
+        ref={ref}
         value={value}
         onChange={handleChange}
         placeholder="Filter by title"
+        onBlur={handleBlur}
       />
     </Fieldset>
   );

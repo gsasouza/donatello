@@ -13,10 +13,10 @@ const useFilter = ({ data }) => {
       data.filter(movie => {
         if (genreFilter)
           return (
-            movie.title.toLowerCase().includes(titleFilter) &&
+            movie.title.toLowerCase().includes(titleFilter.toLowerCase()) &&
             movie.genre.includes(genreFilter)
           );
-        return movie.title.toLowerCase().includes(titleFilter);
+        return movie.title.toLowerCase().includes(titleFilter.toLowerCase());
       })
     );
   }, [data, titleFilter, genreFilter]);

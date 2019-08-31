@@ -15,6 +15,14 @@ const TableWrapper = styled(Box)`
   margin-bottom: 40px;
 `;
 
+const EmptyLabel = styled.span`
+  margin: auto;
+  font-size: 36px;
+  color: #3e3e74;
+  display: flex;
+  justify-content: center;
+`;
+
 const columns = [
   {
     property: 'title',
@@ -82,15 +90,19 @@ const MoviesList = () => {
         handleTitleFilter={handleTitleFilter}
       />
       <TableWrapper>
-        <Table
-          columns={columns}
-          data={paginatedData}
-          totalCount={filteredData.length}
-          page={page}
-          rowsPerPage={rowsPerPage}
-          onRowClick={({ title }) => navigate(`/comments/${title}`)}
-          {...paginationProps}
-        />
+        {!filteredData.length ? (
+          <EmptyLabel> No movies found :( </EmptyLabel>
+        ) : (
+          <Table
+            columns={columns}
+            data={paginatedData}
+            totalCount={filteredData.length}
+            page={page}
+            rowsPerPage={rowsPerPage}
+            onRowClick={({ title }) => navigate(`/comments/${title}`)}
+            {...paginationProps}
+          />
+        )}
       </TableWrapper>
     </Content>
   );
