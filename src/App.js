@@ -9,6 +9,10 @@ const GlobalStyle = createGlobalStyle`
     min-height: 100vh;
     background: linear-gradient(0deg,#3e3e74,#816da0);
   }
+  * {
+    font-family: Lato, sans-serif;;
+  }
+
 `;
 
 const App = () => {

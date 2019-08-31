@@ -3,8 +3,9 @@ import styled from 'styled-components';
 
 const TBody = styled.tbody`
   td {
-    border: 1px solid black;
     padding: 5px 10px;
+    border-bottom: 1px solid #816da04f;
+    border-spacing: 5px 5px;
   }
 `;
 

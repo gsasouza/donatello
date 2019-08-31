@@ -5,26 +5,12 @@ import Table from '../table/Table';
 import usePagination from '../table/hooks/usePagination';
 import useFilter from './hooks/useFilter';
 import movies from './data/movies';
-import TitleFilter from './TitleFilter';
-import GenreFilter from './GenreFilter';
+import Filters, { Box } from './Filters';
 
 const Wrapper = styled.div`
   max-width: 1000px;
   width: 100%;
   margin: 30px auto auto auto;
-`;
-
-const Box = styled.div`
-  box-shadow: -1px 4px 46px -15px rgba(0, 0, 0, 0.3);
-  border-radius: 30px;
-  padding: 15px;
-  background-color: #ffffff;
-`;
-
-const TableWrapper = styled(Box)``;
-
-const FilterWrapper = styled(Box)`
-  margin: 10px 0;
 `;
 
 const ScreenLabel = styled.h1`
@@ -92,17 +78,12 @@ const MoviesList = () => {
   return (
     <Wrapper>
       <ScreenLabel>Movies List</ScreenLabel>
-      <FilterWrapper>
-        <TitleFilter
-          value={filters.title}
-          handleChange={e => handleTitleFilter(e.target.value)}
-        />
-        <GenreFilter
-          value={filters.genre}
-          handleChange={e => handleGenreFilter(e.target.value)}
-        />
-      </FilterWrapper>
-      <TableWrapper>
+      <Filters
+        filters={filters}
+        handleGenreFilter={handleGenreFilter}
+        handleTitleFilter={handleTitleFilter}
+      />
+      <Box>
         <Table
           columns={columns}
           data={paginatedData}
@@ -111,7 +92,7 @@ const MoviesList = () => {
           rowsPerPage={rowsPerPage}
           {...paginationProps}
         />
-      </TableWrapper>
+      </Box>
     </Wrapper>
   );
 };

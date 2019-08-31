@@ -3,8 +3,10 @@ import styled from 'styled-components';
 
 const THead = styled.thead`
   th {
-    border: 1px solid black;
     padding: 5px 10px;
+    text-align: start;
+    border-bottom: 1px solid #3e3e74;
+    border-spacing: 5px 5px;
   }
 `;
 

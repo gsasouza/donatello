@@ -7,6 +7,9 @@ import Pagination from './Pagination';
 
 const StyledTable = styled.table`
   width: 100%;
+  border: 0;
+  border-collapse: separate;
+  border-spacing: 0 5px;
 `;
 
 const Table = ({
