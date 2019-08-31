@@ -6,6 +6,7 @@ import { MdArrowBack } from 'react-icons/md';
 import Box from '../common/Box';
 import Content from '../common/Content';
 import ScreenLabel from '../common/ScreenLabel';
+import AnimatedDots from '../common/AnimatedDots';
 import Comment from './Comment';
 import NewComment from './NewComment';
 import useScrollToBottom from './hooks/useScrollToBottom';
@@ -23,6 +24,14 @@ const Row = styled.div`
   align-items: center;
 `;
 
+const LoadingLabel = styled.span`
+  margin: auto;
+  font-size: 50px;
+  color: #3e3e74;
+  display: flex;
+  align-items: flex-end;
+`;
+
 const BackButton = styled.button`
   border: none;
   background: transparent;
@@ -35,9 +44,17 @@ const BackButton = styled.button`
   }
 `;
 
-const CommentList = ({ title }) => {
-  const { comments, addComment } = useComments();
-  const commentsRef = useScrollToBottom({ items: comments });
+const EmptyLabel = styled(LoadingLabel)`
+  font-size: 30px;
+`;
+
+const CommentContainer = ({
+  commentsRef,
+  comments,
+  addComment,
+  title,
+  children
+}) => {
   return (
     <Content>
       <Row>
@@ -47,14 +64,52 @@ const CommentList = ({ title }) => {
         <ScreenLabel>{`${title} Comments`}</ScreenLabel>
       </Row>
       <Box>
-        <CommentsContainer ref={commentsRef}>
-          {comments.map(comment => (
-            <Comment comment={comment} />
-          ))}
-        </CommentsContainer>
+        <CommentsContainer ref={commentsRef}>{children}</CommentsContainer>
         <NewComment addComment={addComment} />
       </Box>
     </Content>
+  );
+};
+
+const CommentList = ({ title }) => {
+  const { comments, addComment, isLoading } = useComments({ title });
+  const commentsRef = useScrollToBottom({ items: comments });
+  if (isLoading)
+    return (
+      <CommentContainer
+        comments={comments}
+        commentsRef={commentsRef}
+        addComment={addComment}
+        title={title}
+      >
+        <LoadingLabel>
+          Loading
+          <AnimatedDots />
+        </LoadingLabel>
+      </CommentContainer>
+    );
+  if (!comments.length)
+    return (
+      <CommentContainer
+        comments={comments}
+        commentsRef={commentsRef}
+        addComment={addComment}
+        title={title}
+      >
+        <EmptyLabel> There's no comments yet </EmptyLabel>
+      </CommentContainer>
+    );
+  return (
+    <CommentContainer
+      comments={comments}
+      commentsRef={commentsRef}
+      addComment={addComment}
+      title={title}
+    >
+      {comments.map((comment, index) => (
+        <Comment key={index} comment={comment} />
+      ))}
+    </CommentContainer>
   );
 };
 

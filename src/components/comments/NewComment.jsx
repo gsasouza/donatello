@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 
-const Wrapper = styled.div`
+const Wrapper = styled.form`
   display: flex;
   align-items: center;
   background-color: #816da0;
@@ -53,7 +53,7 @@ const NewComment = ({ addComment }) => {
         onChange={e => setComment(e.target.value)}
         placeholder={'Add new comment'}
       />
-      <Button disabled={!comment} onClick={handleSend}>
+      <Button disabled={!comment} onClick={handleSend} type={'submit'}>
         Send
       </Button>
     </Wrapper>
