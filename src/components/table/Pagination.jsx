@@ -8,11 +8,11 @@ const PaginationContainer = styled.div`
 const RowsPerPageSelect = ({ onChangeRowsPerPage, rowsPerPage }) => {
   const rowsPerPageOptions = [10, 25, 50, 100];
   return (
-    <>
-      <label htmlFor={'rowsPerPage'}> Rows per page: </label>
+    <label>
+      {' '}
+      Rows per page:
       <select
         defaultValue={rowsPerPage}
-        fname={'rowsPerPage'}
         onChange={e => onChangeRowsPerPage(e.target.value)}
       >
         {rowsPerPageOptions.map(opt => (
@@ -21,7 +21,7 @@ const RowsPerPageSelect = ({ onChangeRowsPerPage, rowsPerPage }) => {
           </option>
         ))}
       </select>
-    </>
+    </label>
   );
 };
 

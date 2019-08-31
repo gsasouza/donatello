@@ -12,10 +12,9 @@ const usePagination = ({ data, rowsPerPage = 10, page = 0 }) => {
         return { ...state, rowsPerPage: action.value, page: 0 };
       case 'page':
         return { ...state, page: action.value };
-      case 'clear':
+      case 'clearPage':
         return {
           ...state,
-          rowsPerPage: initialState.rowsPerPage,
           page: initialState.page
         };
       case 'paginatedData':
@@ -37,7 +36,7 @@ const usePagination = ({ data, rowsPerPage = 10, page = 0 }) => {
   }, [data, rowsPerPage, page, state.page, state.rowsPerPage]);
 
   React.useEffect(() => {
-    dispatch({ type: 'clear' });
+    dispatch({ type: 'clearPage' });
   }, [data, rowsPerPage, page]);
 
   return {
