@@ -67,8 +67,8 @@ const CommentList = ({ title }) => {
               <AnimatedDots />
             </LoadingLabel>
           )}
-          {!comments.length && (
-            <EmptyLabel> There's no comments yet </EmptyLabel>
+          {!comments.length && !isLoading && (
+            <EmptyLabel> No comments yet. Be the first to add one! </EmptyLabel>
           )}
           {comments.map((comment, index) => (
             <Comment key={index} comment={comment} />
