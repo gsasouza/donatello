@@ -18,13 +18,13 @@ const Button = styled.button`
       background-color: #816da0;
       transition: ease-in 0.1s;
     }
+    cursor: pointer;
     background-color: #3e3e74;
   }
   color: #fff;
   padding: 5px 15px;
   border-radius: 30px;
   margin: 5px;
-  cursor: pointer;
   white-space: pre;
 `;
 
