@@ -6,8 +6,8 @@ import Filters from './Filters';
 import Box from '../common/Box';
 import Content from '../common/Content';
 import ScreenLabel from '../common/ScreenLabel';
-import Table from '../table/Table';
-import usePagination from '../table/hooks/usePagination';
+import Table from '../common/table/Table';
+import usePagination from '../common/table/hooks/usePagination';
 import useFilter from './hooks/useFilter';
 import movies from './data/movies';
 
