@@ -20,7 +20,7 @@ For the router I used reach-router and for styles styled-components.
 Each screen components are inside `src/components`, shared components
 are inside `src/components/common`.
 
-##What would I like to improve?
+## What would I like to improve?
 
 ### Code
 
